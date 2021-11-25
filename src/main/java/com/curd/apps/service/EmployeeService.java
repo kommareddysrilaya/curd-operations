@@ -20,12 +20,23 @@ public class EmployeeService {
     	
     	
     }
+    
     public List<Employee> findAllEmployess() {
     	return employees;
     }
     public String saveEmployee(Employee emp) {
     	employees.add(emp);
     	return "employee details are saved successfully";
+   
+    	
+    }
+    public Employee findEmployeeById(int id) {
+    	for(Employee emp:employees) {
+    		if(emp.getId()==id) {
+    			return emp;
+    		}
+    	}
+    	return new Employee();
     	
     }
 }
