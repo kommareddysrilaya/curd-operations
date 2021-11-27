@@ -3,6 +3,7 @@ package com.curd.apps.service;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -37,6 +38,44 @@ public class EmployeeService {
     		}
     	}
     	return new Employee();
+    
     	
     }
+    
+   public String updateEmployeeById(Employee emp) {
+	   //check if employee is present in database or not
+	   Employee emp1 = findEmployeeById(emp.getId());
+	   if(emp1.getId()==0) {
+		   return "userisnotfound";
+		   
+	   }
+
+	   emp1.setSkillset(emp.getSkillset());
+	   emp1.setName(emp.getName());
+	   emp1.setSalary(emp.getSalary());
+	   return "updated succesfully";
+	   
+   }
+   public String deleteEmployeeById(int id) {
+	   //checking if the given user is present or not in the database
+	   Employee emp =findEmployeeById(id);
+	   if(emp.getId()==0) {
+		   return "userisnotfound";
+		   
+	   }
+	   Iterator<Employee> itr = employees.iterator();
+	   while (itr.hasNext()) {
+		   Employee emp1 = itr.next();
+		   if(emp1.getId()==id) {
+			   itr.remove();
+		   }
+		   
+	   }
+	   return "employee details are deleted";
+	   
+	   
+	   
+	   
+   }
+   
 }
